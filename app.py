@@ -35,7 +35,7 @@ def handle_message(message, say):
     channel_members = get_channel_members()
 
     if message["user"] not in channel_members:
-        app.client.chat_delete(channel=message["channel"], ts=message["ts"])
+        app.client.chat_delete(channel=message["channel"], ts=message["ts"], token=os.getenv("SLACK_USER_TOKEN"))
         return
 
 @app.command("/update-sofias-channel-members")
