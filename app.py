@@ -36,6 +36,11 @@ def handle_message(message, say):
 
     if message["user"] not in channel_members:
         app.client.chat_delete(channel=message["channel"], ts=message["ts"], token=os.getenv("SLACK_USER_TOKEN"))
+        app.client.chat_postEphemeral(
+            channel = eeriergosling,
+            user = message["user"],
+            text = f"this channel is read-only for you, but you're still more than welcome to send messages in threads!\nyou can run this workflow to request that <@U056J6JURFF> whitelists you if you want :)\nhttps://slack.com/shortcuts/Ft084V0SDV1T/51b87fb2e22b2e30347a47cf2a5fb007"
+        )
         return
 
 @app.command("/update-sofias-channel-members")
