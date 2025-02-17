@@ -29,8 +29,11 @@ channel_members = get_channel_members()
 def handle_message(message, say):
     global channel_members
 
-    if (message["channel"] != eeriergosling) or ("thread_ts" in message):
+    if (message["channel"] != eeriergosling):
         return
+    
+    if ("thread_ts" in message):
+        say(message["thread_ts"])
 
     channel_members = get_channel_members()
 
