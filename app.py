@@ -39,10 +39,11 @@ def handle_message(message, say):
         return
 
 @app.command("/update-sofias-channel-members")
-def handle_command(ack):
+def handle_command(ack, say):
     global channel_members
     ack()
     channel_members = app.client.conversations_members(channel=sofia_bubbles)["members"]
+    say(f"Updated Sofia's Channel members")
     
 
 if __name__ == "__main__":
