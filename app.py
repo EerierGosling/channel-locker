@@ -42,7 +42,11 @@ def handle_message(message, say):
 def handle_command(ack, respond):
     global channel_members
     ack()
-    channel_members = app.client.conversations_members(channel=sofia_bubbles)["members"]
+    try:
+        channel_members = app.client.conversations_members(channel=sofia_bubbles)["members"]
+    except Exception as e:
+        respond(f"An error occurred: {e}")
+        return
 
     respond("response")
     
