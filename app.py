@@ -29,35 +29,23 @@ channel_members = get_channel_members()
 def handle_message(message, say):
     global channel_members
 
-    if (message["channel"] != eeriergosling):
+    if (message["channel"] != eeriergosling) or ("thread_ts" in message):
         return
-    
-    if ("thread_ts" in message):
-        say(message["thread_ts"])
 
     channel_members = get_channel_members()
 
     if message["user"] not in channel_members:
-        try:
-            app.client.chat_delete(channel=message["channel"], ts=message["ts"], token=os.getenv("SLACK_USER_TOKEN"))
-        except Exception as e:
-            say(f"An error occurred: {e}")
-            return
+        app.client.chat_delete(channel=message["channel"], ts=message["ts"], token=os.getenv("SLACK_USER_TOKEN"))
         return
 
 @app.command("/update-sofias-channel-members")
 def handle_command(ack, respond):
     global channel_members
     ack()
-    try:
-        channel_members = app.client.conversations_members(channel=sofia_bubbles)["members"]
-        respond(f"channel members = {channel_members}")
-    except Exception as e:
-        respond(f"An error occurred: {e}")
-        return
 
-    respond("response")
-    
+    channel_members = app.client.conversations_members(channel=sofia_bubbles)["members"]
+    respond(f"channel members = {channel_members}")
+
 
 if __name__ == "__main__":
     SocketModeHandler(app, os.getenv("SLACK_APP_TOKEN")).start()
