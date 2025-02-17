@@ -48,6 +48,7 @@ def handle_command(ack, respond):
     ack()
     try:
         channel_members = app.client.conversations_members(channel=sofia_bubbles)["members"]
+        respond(f"channel members = {channel_members}")
     except Exception as e:
         respond(f"An error occurred: {e}")
         return
