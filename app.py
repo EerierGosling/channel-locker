@@ -41,7 +41,7 @@ def handle_message(message, say):
         app.client.chat_postEphemeral(
             channel = eeriergosling,
             user = message["user"],
-            text = f"this channel is read-only for you, but you're still more than welcome to send messages in threads!\nyou can run this workflow to request that <@U056J6JURFF> whitelists you if you want :)\nhttps://slack.com/shortcuts/Ft084V0SDV1T/51b87fb2e22b2e30347a47cf2a5fb007"
+            text = f"this channel is read-only for you, but please stil respond to messages in threads!\nyou can run this workflow to request that <@U056J6JURFF> whitelists you if you want :) (if you request it and you aren't whitelisted it probably isn't personal, the workflow also adds you to a private channel)\nhttps://slack.com/shortcuts/Ft084V0SDV1T/51b87fb2e22b2e30347a47cf2a5fb007"
         )
         return
 
