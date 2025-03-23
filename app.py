@@ -14,6 +14,7 @@ sofia_bubbles = "C07S1QSSKTQ"
 
 last_checked = None
 channel_members = None
+custom_whitelist = ["U088P7SB8CR", "U08DKTR7GH0"]
 
 def get_channel_members():
     current_time = datetime.now()
@@ -28,13 +29,14 @@ channel_members = get_channel_members()
 @app.event("message")
 def handle_message(message, say):
     global channel_members
+    global custom_whitelist
 
     if (message["channel"] != eeriergosling) or ("thread_ts" in message):
         return
 
     channel_members = get_channel_members()
 
-    if message["user"] not in channel_members:
+    if message["user"] not in channel_members and message["user"] not in custom_whitelist:
         app.client.chat_delete(channel=message["channel"], ts=message["ts"], token=os.getenv("SLACK_USER_TOKEN"))
         app.client.chat_postEphemeral(
             channel = eeriergosling,
